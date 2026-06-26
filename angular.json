@@ -100,8 +100,22 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy"
-        }
+        },
+          "test": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": ["src/styles.scss"]
+          }
       }
     }
   }
+}
 }

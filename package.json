@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng testnpm run test -- nome-del-tuo-progetto",
     "serve:ssr:anguprova": "node dist/anguprova/server/server.mjs"
   },
   "private": true,
