@@ -1,0 +1,41 @@
+name: Deploy Website with Symlinks
+
+on:
+  push:
+    branches:
+      - main # Cambia in master se necessario
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive # Opzionale: carica sottomoduli se presenti
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Inserisci qui eventuali passaggi di build (es. npm run build) se il sito non è statico puro
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Cambia con la cartella di build (es. './dist') se applicabile
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
